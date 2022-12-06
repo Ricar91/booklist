@@ -1,10 +1,11 @@
 import { useContext, useState } from "react";
 import { BooksContext } from "../Context/BooksContext";
+import { ACTIONS } from "../Reducer/bookReducer";
 
 export default function NewBookForm() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const { books, setBooks } = useContext(BooksContext);
+  const { books, dispatch } = useContext(BooksContext);
 
   function generateId(books) {
     const id = Math.max(0, ...books.map((book) => book.id)) + 1;
@@ -15,7 +16,7 @@ export default function NewBookForm() {
     e.preventDefault();
 
     const newBook = { id: generateId(books), title: title, author: author };
-    setBooks((prevState) => [...prevState, newBook]);
+    dispatch({ type: ACTIONS.ADD_BOOK, payload: newBook });
     setTitle("");
     setAuthor("");
   }

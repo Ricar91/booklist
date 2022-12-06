@@ -9,7 +9,7 @@ export default function Booklist() {
     <div>
       <ul>
         {books.map((book) => (
-          <BookDetails book={book} />
+          <BookDetails book={book} key={book.id} />
         ))}
       </ul>
     </div>
